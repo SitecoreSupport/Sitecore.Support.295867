@@ -43,7 +43,13 @@ namespace Sitecore.Support.Commerce.Engine.Connect.Search.Crawlers
 
                 if (isMapped)
                 {
-                    indexableList.Add(this.TryGetItem(catalog, catalog.SitecoreId));
+                    #region modified part. Added check for Null to prevent adding a Null element to the indexableList
+                    CommerceCatalogIndexableItem item = this.TryGetItem(catalog, catalog.SitecoreId);
+                    if (item != null)
+                    {
+                        indexableList.Add(item);
+                    }
+                    #endregion
                 }
             }
 
